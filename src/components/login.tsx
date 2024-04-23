@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginUser } from '../apiServer';
+import { checkUserExists, loginUser } from '../apiServer';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -16,27 +16,27 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const loginSuccess = await loginUser(formData.email, formData.password, userType);
-      if (loginSuccess) {
-        alert('Login successful');
-        navigate('/createTicket')
-        switch (userType) {
-          case 'end-user':
-            navigate('/dashboard')
-          //  navigate('/createTicket')
-            break;
-          case 'tech-support':
-            navigate('/createTicket')
-            break;
-          case 'admin':
-            navigate('/createTicket')
-            break;
-          default:
-            navigate('/');
-            break;
+      const userExists = await checkUserExists(formData.email, formData.password, userType);
+      if (userExists) {
+        const loginSuccess = await loginUser(formData.email, formData.password, userType);
+        localStorage.setItem('loggedInUser', JSON.stringify({ email: formData.email, userType }));
+        if (loginSuccess) {
+          alert('Login successful');
+          switch (userType) {
+            case 'end-user':
+            case 'tech-support':
+            case 'admin':
+              navigate('/dashboard');
+              break;
+            default:
+              navigate('/');
+              break;
+          }
+        } else {
+          alert('Login failed');
         }
       } else {
-        alert('Login failed');
+        alert('Login failed: Email, password, or user type did not match');
       }
       setFormData({ email: '', password: '' });
     } catch (error) {
@@ -44,6 +44,7 @@ const Login = () => {
     }
   };
 
+  
   const handleUserTypeChange = (type: 'end-user' | 'tech-support' | 'admin') => {
     setUserType(type);
   };

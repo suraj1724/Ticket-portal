@@ -55,13 +55,21 @@
       "email": "alishamaner2001@gmail.com",
       "password": "alisha",
       "type": "end-user"
+    },
+    {
+      "id": "41c0",
+      "username": "ishan",
+      "email": "ishanattar@gmail.com",
+      "password": "password",
+      "type": "admin"
     }
   ],
   "tickets": [
     {
       "id": "1",
       "subject": "Issue with login and data",
-      "description": "Unable to login to the system asdsad"
+      "description": "Unable to login to the system",
+      "status": "close"
     },
     {
       "id": "2",
@@ -85,13 +93,15 @@
       "id": "dd56",
       "subject": "Your subject",
       "description": "Your description",
-      "attachments": " Your attachments"
+      "status": "close",
+      "attachments": "Your attachments"
     },
     {
       "id": "ce4c",
-      "subject": "this is error",
-      "description": "please check and resolve",
-      "attachment": {}
+      "subject": "This is error",
+      "description": "Please check and resolve",
+      "status": "close",
+      "attachments": {}
     }
   ]
 }

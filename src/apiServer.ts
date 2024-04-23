@@ -91,4 +91,44 @@ export const createUser = async (username: string, email: string, password: stri
       throw new Error('An error occurred while updating ticket');
     }
   };
-  
+
+ 
+export const checkUserRole = async (): Promise<string | null> => {
+  try {
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    if (!loggedInUser) {
+      throw new Error('User details not found in local storage');
+    }
+    const { email } = JSON.parse(loggedInUser);
+    const response = await api.get(`/users?email=${email}`);
+    const user = response.data[0];
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return user.type;
+  } catch (error) {
+    console.error('Error checking user role:', error);
+    throw new Error('An error occurred while checking user role');
+  }
+};
+
+export const checkUserExists = async (email: string, password: string, userType: string): Promise<boolean> => {
+  try {
+    const response = await api.get(`/users?email=${email}`);
+    const user = response.data[0];
+    if (!user) {
+      return false; 
+    }
+    if (user.password !== password) {
+      return false;
+    }
+    if (user.type !== userType) {
+      return false; 
+    }
+    return true; 
+  } catch (error) {
+    console.error('Error checking user existence:', error);
+    throw new Error('An error occurred while checking user existence');
+  }
+};

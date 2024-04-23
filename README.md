@@ -18,6 +18,12 @@
         # Start json-server to serve the database
         json-server --watch server/db.json --port 8000
 
+        #api Enpoints
+        http://localhost:8000/users
+        http://localhost:8000/tickets
+
+
+
 
 ## Start the Project
 
