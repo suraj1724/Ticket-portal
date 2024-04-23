@@ -8,9 +8,12 @@ import Dashboard from './components/Dashboard';
 import { updateTicket } from './apiServer';
 import UpdateTicket from './components/UpdateTicket';
 import UpdateOne from './components/updateOne';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 const App = () => {
   return (
+    <Provider store={store}>
     <Router>
     <Routes>
         <Route  path="/" Component={Login} />
@@ -22,6 +25,7 @@ const App = () => {
         <Route path="/tickets/update/:id" Component={UpdateOne} />
         </Routes>   
     </Router>
+    </Provider>
   );
 };
 
