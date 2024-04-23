@@ -1,0 +1,97 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "enduser",
+      "email": "enduser@example.com",
+      "password": "password",
+      "type": "end-user"
+    },
+    {
+      "id": "2",
+      "username": "techsupport",
+      "email": "techsupport@example.com",
+      "password": "password",
+      "type": "tech-support"
+    },
+    {
+      "id": "3",
+      "username": "admin",
+      "email": "admin@example.com",
+      "password": "password",
+      "type": "admin"
+    },
+    {
+      "id": "c428",
+      "username": "suraj",
+      "email": "suraj@master.com",
+      "password": "password",
+      "type": "end-user"
+    },
+    {
+      "id": "ee9e",
+      "username": "",
+      "email": "suraj@masterblocks.co.in",
+      "password": "suraj@123",
+      "type": "admin"
+    },
+    {
+      "id": "8288",
+      "username": "",
+      "email": "masterblocks.dev@gmail.com",
+      "password": "password",
+      "type": "admin"
+    },
+    {
+      "id": "6a26",
+      "username": "",
+      "email": "suraj@master.com",
+      "password": "password",
+      "type": "end-user"
+    },
+    {
+      "id": "1612",
+      "username": "Alisha",
+      "email": "alishamaner2001@gmail.com",
+      "password": "alisha",
+      "type": "end-user"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "1",
+      "subject": "Issue with login and data",
+      "description": "Unable to login to the system asdsad"
+    },
+    {
+      "id": "2",
+      "userId": "2",
+      "subject": "Software crash",
+      "description": "Application crashes on startup",
+      "status": "open",
+      "attachments": [
+        "file2.pdf"
+      ]
+    },
+    {
+      "id": "3",
+      "userId": "3",
+      "subject": "User permissions",
+      "description": "User unable to access certain features",
+      "status": "close",
+      "attachments": []
+    },
+    {
+      "id": "dd56",
+      "subject": "Your subject",
+      "description": "Your description",
+      "attachments": " Your attachments"
+    },
+    {
+      "id": "ce4c",
+      "subject": "this is error",
+      "description": "please check and resolve",
+      "attachment": {}
+    }
+  ]
+}
