@@ -23,6 +23,9 @@
         http://localhost:8000/tickets
 
 
+        # Now server is started to start the Project Open a new tab in terminal/command Prompt/ bash
+
+
 
 
 ## Start the Project
