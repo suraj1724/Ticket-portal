@@ -1,7 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Ticket } from '../types';
 import { updateTicket, getTicketById } from '../apiServer';
+import { checkUserRole } from '../apiServer'; 
 
 const UpdateOne = () => {
   const { id } = useParams(); 
@@ -10,6 +12,8 @@ const UpdateOne = () => {
   const [ticket, setTicket] = useState<Ticket | null>(null);
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
+  const [status, setStatus] = useState('open')
+  const [isAdmin, setIsAdmin] = useState<boolean>(false); 
 
   useEffect(() => {
     const fetchTicket = async () => {
@@ -18,6 +22,7 @@ const UpdateOne = () => {
         setTicket(fetchedTicket);
         setSubject(fetchedTicket.subject);
         setDescription(fetchedTicket.description);
+        setStatus(fetchedTicket.status); 
       } catch (error) {
         console.error('Error fetching ticket:', error);
       }
@@ -25,6 +30,19 @@ const UpdateOne = () => {
 
     fetchTicket();
   }, [id]); 
+
+  useEffect(() => {
+    const getUserRole = async () => {
+      try {
+        const userRole = await checkUserRole();
+        setIsAdmin(userRole === 'admin');
+      } catch (error) {
+        console.error('Error fetching user role:', error);
+      }
+    };
+
+    getUserRole();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +56,7 @@ const UpdateOne = () => {
         id,
         subject,
         description,
+        status,
       };
 
       const updateSuccess = await updateTicket(id, updatedTicketData);
@@ -83,6 +102,22 @@ const UpdateOne = () => {
               placeholder="Enter description"
             ></textarea>
           </div>
+          {isAdmin && ( 
+            <div className="mb-4">
+              <label htmlFor="status" className="block text-gray-700 text-sm font-bold mb-2">
+                Status
+              </label>
+              <select
+                id="status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option value="open">Open</option>
+                <option value="close">Close</option>
+              </select>
+            </div>
+          )}
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

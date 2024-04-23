@@ -22,7 +22,7 @@ const TicketList = () => {
   }, []);
 
   const handleEditTicketClick = (id: any) => {
-    navigate(`/tickets/update/${id}`); // Redirect to the UpdateTicket component with ticket ID
+    navigate(`/tickets/update/${id}`); 
   };
 
   return (

@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { createTicket } from '../apiServer';
-import { Navigator, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CreateTicket = () => {
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
   const [attachment, setAttachment] = useState<File | null>(null);
+  const [status, setStatus] = useState('open'); // Default status set to 'open'
   const navigate = useNavigate();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (!subject || !description || !attachment) {
+      if (!subject || !description || !attachment || !status) {
         alert('Please fill in all fields and attach a file');
         return;
       }
@@ -19,12 +21,12 @@ const CreateTicket = () => {
       formData.append('subject', subject);
       formData.append('description', description);
       formData.append('attachment', attachment);
+      formData.append('status', status);
 
       const createSuccess = await createTicket(formData);
       if (createSuccess) {
         alert('Ticket created successfully');
-        navigate("/tickets")
-        // Redirect or perform any other action upon successful ticket creation
+        navigate('/tickets');
       } else {
         alert('Failed to create ticket');
       }
@@ -81,6 +83,20 @@ const CreateTicket = () => {
             onChange={handleFileChange}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="status" className="block text-gray-700 text-sm font-bold mb-2">
+            Status
+          </label>
+          <select
+            id="status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          >
+            <option value="open">Open</option>
+            <option value="close">Close</option>
+          </select>
         </div>
         <button
           type="submit"

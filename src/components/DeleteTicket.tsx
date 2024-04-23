@@ -20,9 +20,7 @@ const DeleteTicket = () => {
     fetchTickets();
   }, []);
 
-  const handleCreateTicketClick = () => {
-    navigate('/createTicket');
-  };
+
 
   const handleDeleteTicket = async (ticketId: string) => {
     try {
@@ -70,9 +68,7 @@ const DeleteTicket = () => {
             </button>
           </div>
         ))}
-        <button onClick={handleCreateTicketClick} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Create Ticket
-        </button>
+      
       </div>
     </div>
   );
