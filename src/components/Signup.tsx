@@ -6,7 +6,7 @@ const Signup = () => {
     username: "",
     email: "",
     password: "",
-    type: "end-user", // Default to "end-user" type
+    type: "end-user", 
   });
 
   const handleChange = (
@@ -20,7 +20,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       if (!["end-user", "tech-support", "admin"].includes(formData.type)) {
-        formData.type = "end-user"; // Set default type if not valid
+        formData.type = "end-user"; 
       }
       const createSuccess = await createUser(
         formData.username || "",
@@ -30,7 +30,7 @@ const Signup = () => {
       );
       if (createSuccess) {
         alert("Account created successfully");
-        setFormData({ username: "", email: "", password: "", type: "end-user" }); // Reset form data
+        setFormData({ username: "", email: "", password: "", type: "end-user" }); 
       } else {
         alert("Failed to create account");
       }
